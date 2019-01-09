@@ -207,6 +207,64 @@ public class Picture extends SimplePicture
     this.write("collage.jpg");
   }
   
+  public void randomColor()
+  {
+	  int randomInt = (int)(Math.random() * 3);
+	  
+	  if(randomInt == 0)
+	  {
+		  Pixel[][] pixels = this.getPixels2D();
+		  for (Pixel [] rowArray : pixels)
+		  {
+			  for (Pixel pixelObj : rowArray)
+			  {
+				  pixelObj.setBlue(0);			  
+			  }
+		  }
+	  }
+	  else if(randomInt == 1)
+	  {
+		  Pixel[][] pixels = this.getPixels2D();
+		  for (Pixel [] rowArray : pixels)
+		  {
+			  for (Pixel pixelObj : rowArray)
+			  {
+				  pixelObj.setRed(0);			  
+			  }
+		  }
+	  }
+	  else if(randomInt == 2)
+	  {
+		  Pixel[][] pixels = this.getPixels2D();
+		  for (Pixel [] rowArray : pixels)
+		  {
+			  for (Pixel pixelObj : rowArray)
+			  {
+				  pixelObj.setGreen(0);		  
+			  }
+		  }
+	  }
+  }
+  
+  public void glitchy()
+  {
+	  Pixel [][] pixels = getPixels2D();
+	  int center = (int)(Math.random() * 639);
+	  Pixel leftPixel = null;
+	  Pixel rightPixel = null;
+	  
+	  for (int row = (int)(Math.random() * 479); row < (int)(Math.random() * 479); row++)
+	    {
+	      for (int col = (int)(Math.random() * 639) ;col < center; col++)
+	      {
+	        
+	        leftPixel = pixels[row][col];      
+	        rightPixel = pixels[row][center - col + center];
+	        rightPixel.setColor(leftPixel.getColor());
+	      }
+	    }
+	  randomColor();
+  }
   
   /** Method to show large changes in color 
     * @param edgeDist the distance for finding edges
@@ -241,7 +299,7 @@ public class Picture extends SimplePicture
   {
     Picture beach = new Picture("beach.jpg");
     beach.explore();
-    beach.createCollage();
+    beach.glitchy();
     beach.explore();
   }
   
