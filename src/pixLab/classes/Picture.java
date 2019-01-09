@@ -266,6 +266,23 @@ public class Picture extends SimplePicture
 	  randomColor();
   }
   
+  public void chromakey(Picture replacement, Color changeColor)
+  {
+	  Pixel [][] mainPixels = this.getPixels2D();
+	  Pixel [][] replacementPixels = replacement.getPixels2D();
+	  
+	  for (int row = 0; row < mainPixels.length; row++)
+	  {
+		  for (int col = 0; col < mainPixels[0].length; col++)
+		  {
+			  if (mainPixels[row][col].colorDistance(changeColor) < 55)
+			  {
+				  mainPixels[row][col].setColor(replacementPixels[row][col].getColor());
+			  }
+		  }
+	  }
+  }
+  
   /** Method to show large changes in color 
     * @param edgeDist the distance for finding edges
     */
@@ -298,9 +315,7 @@ public class Picture extends SimplePicture
   public static void main(String[] args) 
   {
     Picture beach = new Picture("beach.jpg");
-    beach.explore();
-    beach.glitchy();
-    beach.explore();
+    
   }
   
 } // this } is the end of class Picture, put all new methods before this

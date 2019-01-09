@@ -1,4 +1,5 @@
 package pixLab.classes;
+import java.awt.Color;
 /**
  * This class contains class (static) methods
  * that will help you test the Picture class 
@@ -16,6 +17,17 @@ public class PictureTester
     beach.explore();
     beach.zeroBlue();
     beach.explore();
+  }
+  
+  public static void testChromakey()
+  {
+	  Picture source = new Picture("tachunky.png");
+	  Picture background = new Picture("blackmarble.jpg");
+	  
+	  source.explore();
+	  background.explore();
+	  source.chromakey(background, new Color(200, 200, 200));
+	  source.explore();
   }
   
   /** Method to test mirrorVertical */
@@ -59,14 +71,15 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-    testZeroBlue();
+	  testChromakey();
+    //testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
     //testKeepOnlyGreen();
     //testNegate();
     //testGrayscale();
     //testFixUnderwater();
-    testMirrorVertical();
+    //testMirrorVertical();
     //testMirrorTemple();
     //testMirrorArms();
     //testMirrorGull();
