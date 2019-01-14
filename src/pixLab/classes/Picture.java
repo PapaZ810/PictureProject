@@ -246,10 +246,36 @@ public class Picture extends SimplePicture
 	  }
   }
   
+  public void shiftUpDown(int amount) 
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  Picture temp = new Picture(this);
+	  Pixel[][] copied = temp.getPixels2D();
+	  
+	  int shiftedValue = amount;
+	  int height = pixels.length;
+	  
+	  for (int row = 0; row < pixels.length; row++)
+	  {
+		  for(int col = 0; col < pixels[0].length; col++)
+		  {
+			  shiftedValue = Math.abs((row + amount) % height);
+			  copied[row][col].setColor(pixels[shiftedValue][col].getColor());
+		  }
+	  }
+	  for (int row = 0; row < pixels.length; row++)
+	  {
+		  for (int col = 0; col < pixels[0].length; col++)
+		  {
+			  pixels[row][col].setColor(copied[row][col].getColor());
+		  }
+	  }
+  }
+  
   public void shiftLeftRight(int amount) 
   {
 	  Pixel[][] pixels = this.getPixels2D();
-	  Picture temp =new Picture(this);
+	  Picture temp = new Picture(this);
 	  Pixel[][] copied = temp.getPixels2D();
 	  
 	  int shiftedValue = amount;
@@ -259,7 +285,7 @@ public class Picture extends SimplePicture
 	  {
 		  for(int col = 0; col < pixels[0].length; col++)
 		  {
-			  shiftedValue = (col + amount) % width;
+			  shiftedValue = Math.abs((col + amount) % width);
 			  copied[row][col].setColor(pixels[row][shiftedValue].getColor());
 		  }
 	  }
@@ -290,6 +316,8 @@ public class Picture extends SimplePicture
 	      }
 	    }
 	  randomColor();
+	  shiftLeftRight(200);
+	  shiftUpDown(150);
   }
   
   public void chromakey(Picture replacement, Color changeColor)
