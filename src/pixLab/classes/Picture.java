@@ -298,6 +298,20 @@ public class Picture extends SimplePicture
 	  }
   }
   
+  public void randomSide()
+  {
+	  int randomInt = (int)(Math.random() * 2);
+	  
+	  if(randomInt == 0)
+	  {
+		  mirrorVertical();
+	  }
+	  else if(randomInt == 1)
+	  {
+		  mirrorHorizontal();
+	  }
+  }
+  
   public void glitchy()
   {
 	  Pixel [][] pixels = getPixels2D();
@@ -307,7 +321,7 @@ public class Picture extends SimplePicture
 	  
 	  for (int row = (int)(Math.random() * 479); row < (int)(Math.random() * 479); row++)
 	    {
-	      for (int col = (int)(Math.random() * 639) ;col < center; col++)
+	      for (int col = (int)(Math.random() * 639); col < center; col++)
 	      {
 	        
 	        leftPixel = pixels[row][col];      
@@ -318,6 +332,7 @@ public class Picture extends SimplePicture
 	  randomColor();
 	  shiftLeftRight(200);
 	  shiftUpDown(150);
+	  randomSide();
   }
   
   public void chromakey(Picture replacement, Color changeColor)
@@ -362,6 +377,49 @@ public class Picture extends SimplePicture
     }
   }
   
+  public void revealPicture()
+  {
+	  Pixel [][] pixels = this.getPixels2D();
+	  
+	  for (int row = 0; row < pixels.length; row++)
+	  {
+		  for (int col = 0; col < pixels[0].length; col++)
+		  { 
+			  if (pixels[row][col].getRed() % 2 != 1)
+			  {
+				  pixels[row][col].setColor(new Color(0, 150, 150));
+			  }
+			  else if (pixels[row][col].getRed() % 2 == 1)
+			  {
+				  pixels[row][col].setColor(new Color(150, 150, 0));
+			  }
+		  }
+	  }
+  }
+  
+  public void hidePicture(Picture hidden)
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  Pixel[][] hiddenPixels = hidden.getPixels2D();
+	  
+	  for (int row = 0; row < pixels.length && row < hiddenPixels.length; row++)
+	  {
+		  for (int col = 0; col < hiddenPixels[0].length && col < pixels[0].length; col++)
+		  { 
+			  if (hiddenPixels[row][col].colorDistance(Color.WHITE) > 5)
+			  {
+				  if (pixels[row][col].getRed() % 2 != 1 &&  pixels[row][col].getRed() > 0)
+				  {
+					  pixels[row][col].setRed(pixels[row][col].getRed() - 1);
+				  }
+			  }
+			  else if (pixels[row][col].getRed() % 2 == 1 && pixels[row][col].getRed() > 0)
+			  {
+				  pixels[row][col].setColor(new Color(150, 150, 0));
+			  }
+		  }
+	  }
+  }
   
   /* Main method for testing - each class in Java can have a main 
    * method 

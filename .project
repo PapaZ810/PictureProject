@@ -14,16 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/pixLab/images/blackmarble.jpg</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Downloads/blackmarble.jpg</locationURI>
-		</link>
-		<link>
-			<name>src/pixLab/images/tachunky.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Downloads/tachunky.png</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>

@@ -19,6 +19,27 @@ public class PictureTester
     beach.explore();
   }
   
+  public static void testGlitchy()
+  {
+	  Picture beach = new Picture("beach.jpg");
+	  beach.explore();
+	  beach.glitchy();
+	  beach.explore();
+  }
+  
+  public static void testSteganography()
+  {
+	  Picture source = new Picture("blackmarble.jpg");
+	  
+	  Picture message = new Picture("target.jpg");
+	  source.explore();
+	  message.explore();
+	  source.hidePicture(message);
+	  source.explore();
+	  source.revealPicture();
+	  source.explore();
+  }
+  
   public static void testChromakey()
   {
 	  Picture source = new Picture("tachunky.png");
@@ -71,7 +92,9 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-	  testChromakey();
+	//testChromakey();
+	//  testGlitchy();
+	  testSteganography();
     //testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
