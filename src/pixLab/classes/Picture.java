@@ -330,9 +330,9 @@ public class Picture extends SimplePicture
 	      }
 	    }
 	  randomColor();
-	  shiftLeftRight(200);
-	  shiftUpDown(150);
 	  randomSide();
+	  shiftLeftRight((int)(Math.random() * 639));
+	  shiftUpDown((int)(Math.random() * 439));
   }
   
   public void chromakey(Picture replacement, Color changeColor)
